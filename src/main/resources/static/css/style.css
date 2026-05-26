@@ -1,0 +1,449 @@
+/* =========================
+   IMPORTAR FUENTE
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* =========================
+   VARIABLES DE COLOR
+========================= */
+:root{
+    --principal: #2d6a4f;
+    --naranja: #e07b2e;
+    --azul-claro: #d8f3dc;
+    --verde: #40916c;
+    --oscuro: #1b4332;
+
+    --blanco: #ffffff;
+    --gris: #6b7280;
+    --gris-claro: #f5f7fa;
+
+    --sombra: 0 10px 30px rgba(0,0,0,0.08);
+    --sombra-hover: 0 15px 35px rgba(0,0,0,0.12);
+
+    --radio: 20px;
+    --transicion: all .3s ease;
+}
+
+/* =========================
+   RESET
+========================= */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body{
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(
+            135deg,
+            #d8f3dc,
+            #eef8f1,
+            #ffffff
+    );
+    min-height: 100vh;
+    color: #1f2937;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.layout{
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+.main-content{
+    flex: 1;
+    padding: 35px;
+}
+
+/* =========================
+   HEADER
+========================= */
+.page-header{
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(10px);
+
+    border-radius: 30px;
+    padding: 35px;
+
+    box-shadow: var(--sombra);
+
+    margin-bottom: 30px;
+
+    border: 1px solid rgba(255,255,255,.7);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.page-header small{
+    color: var(--principal);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.page-header h1{
+    color: var(--oscuro);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.page-header p{
+    color: var(--gris);
+    margin-top: 10px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+.buttons{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-custom{
+    border: none;
+    padding: 14px 24px;
+    border-radius: 15px;
+
+    color: white;
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: var(--transicion);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+.btn-custom:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-hover);
+}
+
+.btn-principal{
+    background: var(--principal);
+}
+
+.btn-principal:hover{
+    background: #1e4d38;
+}
+
+.btn-naranja{
+    background: var(--naranja);
+}
+
+.btn-naranja:hover{
+    background: #c06624;
+}
+
+.btn-verde{
+    background: var(--verde);
+}
+
+.btn-verde:hover{
+    background: #2d6a4f;
+}
+
+/* =========================
+   ALERTAS
+========================= */
+.alert-success-custom{
+    background: #ecfdf5;
+    border-left: 6px solid var(--verde);
+
+    padding: 18px 20px;
+
+    border-radius: 15px;
+
+    color: var(--verde);
+    font-weight: 600;
+
+    margin-bottom: 25px;
+
+    box-shadow: var(--sombra);
+}
+
+/* =========================
+   CARD TABLA
+========================= */
+.card-table{
+    background: white;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow: var(--sombra);
+}
+
+/* =========================
+   HEADER TABLA
+========================= */
+.card-table-header{
+    background: var(--oscuro);
+
+    padding: 25px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card-table-header h2{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.card-table-header p{
+    color: var(--azul-claro);
+    margin-top: 5px;
+}
+
+/* =========================
+   BUSCADOR
+========================= */
+.search-box{
+    position: relative;
+}
+
+.search-box input{
+    border: none;
+    outline: none;
+
+    padding: 14px 18px;
+    padding-right: 45px;
+
+    border-radius: 15px;
+
+    min-width: 280px;
+
+    font-size: .95rem;
+}
+
+.search-box span{
+    position: absolute;
+
+    right: 15px;
+    top: 13px;
+
+    color: #9ca3af;
+}
+
+/* =========================
+   TABLA
+========================= */
+.table-container{
+    overflow-x: auto;
+}
+
+.custom-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table thead{
+    background: var(--azul-claro);
+}
+
+.custom-table thead th{
+    padding: 18px 15px;
+
+    text-align: left;
+
+    color: var(--oscuro);
+
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.custom-table tbody td{
+    padding: 18px 15px;
+
+    border-bottom: 1px solid #eef2f7;
+
+    font-size: .95rem;
+}
+
+.custom-table tbody tr{
+    transition: var(--transicion);
+}
+
+.custom-table tbody tr:hover{
+    background: rgba(216,243,220,.3);
+}
+
+/* =========================
+   ACCIONES
+========================= */
+.actions{
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action{
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: var(--transicion);
+
+    text-decoration: none;
+}
+
+.btn-action:hover{
+    transform: scale(1.08);
+}
+
+.btn-edit{
+    background: var(--oscuro);
+}
+
+.btn-edit:hover{
+    background: var(--principal);
+}
+
+.btn-delete{
+    background: var(--naranja);
+}
+
+.btn-delete:hover{
+    background: #dc2626;
+}
+
+/* =========================
+   BADGES
+========================= */
+.badge-password{
+    background: #f3f4f6;
+
+    color: #6b7280;
+
+    padding: 8px 14px;
+
+    border-radius: 50px;
+
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.badge-especie{
+    background: #d8f3dc;
+    color: var(--oscuro);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.badge-rol{
+    background: #fff3e0;
+    color: #c06624;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+/* =========================
+   TEXTO ESPECIAL
+========================= */
+.text-email{
+    color: var(--principal);
+    font-weight: 600;
+}
+
+.text-id{
+    color: var(--oscuro);
+    font-weight: 700;
+}
+
+.text-precio{
+    color: var(--verde);
+    font-weight: 700;
+}
+
+.text-cantidad{
+    color: var(--oscuro);
+    font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width: 900px){
+
+    .main-content{
+        padding: 20px;
+    }
+
+    .page-header{
+        padding: 25px;
+    }
+
+    .page-header h1{
+        font-size: 2rem;
+    }
+
+    .search-box input{
+        width: 100%;
+        min-width: unset;
+    }
+
+    .card-table-header{
+        align-items: stretch;
+    }
+
+}
+
+@media(max-width: 600px){
+
+    .page-header{
+        border-radius: 20px;
+    }
+
+    .card-table{
+        border-radius: 20px;
+    }
+
+    .btn-custom{
+        width: 100%;
+        justify-content: center;
+    }
+
+}

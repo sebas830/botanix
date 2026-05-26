@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Plantas - BOTANIX</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#2d6a4f',
+                        naranja: '#e07b2e',
+                        azulClaro: '#d8f3dc',
+                        verde: '#40916c',
+                        oscuro: '#1b4332'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-[#d8f3dc] via-[#eef8f1] to-white min-h-screen">
+
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <div th:replace="fragments/layout :: sidebar('plantas')"></div>
+
+    <!-- CONTENIDO -->
+    <main class="flex-1 p-6 lg:p-10 overflow-hidden">
+
+        <!-- HEADER -->
+        <section class="page-header">
+
+            <div>
+                <small>🌿 Catálogo Botánico</small>
+
+                <h1>
+                    Plantas Registradas
+                </h1>
+
+                <p>
+                    Administra el inventario de plantas, especies y su disponibilidad.
+                </p>
+            </div>
+
+            <div class="buttons">
+
+                <a th:href="@{/view/plantas/form}"
+                   class="btn-custom btn-principal">
+                    🌱 Nueva Planta
+                </a>
+
+                <a th:href="@{/view/plantas/pdf}"
+                   class="btn-custom btn-naranja">
+                    📄 Exportar PDF
+                </a>
+
+                <a th:href="@{/view/plantas/excel}"
+                   class="btn-custom btn-verde">
+                    📊 Exportar Excel
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- ALERTA -->
+        <div th:if="${message}"
+             class="alert-success-custom"
+             th:text="${message}">
+        </div>
+
+        <!-- TABLA -->
+        <section class="card-table">
+
+            <!-- HEADER TABLA -->
+            <div class="card-table-header">
+
+                <div>
+                    <h2>
+                        🌿 Inventario de Plantas
+                    </h2>
+                    <p>
+                        Información botánica y disponibilidad en stock.
+                    </p>
+                </div>
+
+                <!-- BUSCADOR -->
+                <div class="search-box">
+                    <input type="text"
+                           id="searchInput"
+                           placeholder="Buscar planta...">
+                    <span>🔍</span>
+                </div>
+
+            </div>
+
+            <!-- CONTENEDOR -->
+            <div class="table-container">
+
+                <table class="custom-table">
+
+                    <thead>
+                    <tr>
+                        <th>⚙️</th>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Nombre Científico</th>
+                        <th>Especie</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="planta : ${plantas}">
+
+                        <!-- ACCIONES -->
+                        <td>
+                            <div class="actions">
+
+                                <a th:href="@{'/view/plantas/edit/' + ${planta.id_planta}}"
+                                   class="btn-action btn-edit">
+                                    ✏️
+                                </a>
+
+                                <form th:action="@{'/view/plantas/delete/' + ${planta.id_planta}}"
+                                      method="post">
+                                    <button type="submit"
+                                            class="btn-action btn-delete"
+                                            onclick="return confirm('¿Desea eliminar esta planta del catálogo?')">
+                                        🗑️
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+
+                        <td class="text-id" th:text="${planta.id_planta}"></td>
+                        <td th:text="${planta.codigo}"></td>
+                        <td><strong th:text="${planta.nombre}"></strong></td>
+                        <td><em th:text="${planta.nombre_cientifico}"></em></td>
+                        <td>
+                            <span class="badge-especie" th:text="${planta.especie}"></span>
+                        </td>
+                        <td class="text-cantidad" th:text="${planta.cantidad}"></td>
+                        <td class="text-precio" th:text="'$' + ${planta.precio}"></td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
+

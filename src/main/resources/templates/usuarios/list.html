@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - BOTANIX</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#2d6a4f',
+                        naranja: '#e07b2e',
+                        azulClaro: '#d8f3dc',
+                        verde: '#40916c',
+                        oscuro: '#1b4332'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-[#d8f3dc] via-[#eef8f1] to-white min-h-screen">
+
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <div th:replace="fragments/layout :: sidebar('usuarios')"></div>
+
+    <!-- CONTENIDO -->
+    <main class="flex-1 p-6 lg:p-10 overflow-hidden">
+
+        <!-- HEADER -->
+        <section class="page-header">
+
+            <div>
+                <small>👥 Acceso al Sistema</small>
+
+                <h1>
+                    Usuarios del Sistema
+                </h1>
+
+                <p>
+                    Gestiona las cuentas de acceso al sistema BOTANIX.
+                </p>
+            </div>
+
+            <div class="buttons">
+
+                <a th:href="@{/view/usuarios/form}"
+                   class="btn-custom btn-principal">
+                    👤 Nuevo Usuario
+                </a>
+
+                <a th:href="@{/view/usuarios/pdf}"
+                   class="btn-custom btn-naranja">
+                    📄 Exportar PDF
+                </a>
+
+                <a th:href="@{/view/usuarios/excel}"
+                   class="btn-custom btn-verde">
+                    📊 Exportar Excel
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- ALERTA -->
+        <div th:if="${success}"
+             class="alert-success-custom"
+             th:text="${success}">
+        </div>
+
+        <!-- TABLA -->
+        <section class="card-table">
+
+            <!-- HEADER TABLA -->
+            <div class="card-table-header">
+
+                <div>
+                    <h2>
+                        👥 Usuarios Registrados
+                    </h2>
+
+                    <p>
+                        Cuentas con acceso al panel de BOTANIX.
+                    </p>
+                </div>
+
+                <!-- BUSCADOR -->
+                <div class="search-box">
+
+                    <input type="text"
+                           id="searchInput"
+                           placeholder="Buscar usuario...">
+
+                    <span>🔍</span>
+
+                </div>
+
+            </div>
+
+            <!-- CONTENEDOR -->
+            <div class="table-container">
+
+                <table class="custom-table">
+
+                    <thead>
+                    <tr>
+                        <th>⚙️</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tipo Doc.</th>
+                        <th>Documento</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Contraseña</th>
+                        <th>Fecha Nac.</th>
+                        <th>Observaciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="usuario : ${usuarios}">
+
+                        <!-- ACCIONES -->
+                        <td>
+
+                            <div class="actions">
+
+                                <a th:href="@{'/view/usuarios/edit/' + ${usuario.id_usuarios}}"
+                                   class="btn-action btn-edit">
+                                    ✏️
+                                </a>
+
+                                <form th:action="@{'/view/usuarios/delete/' + ${usuario.id_usuarios}}"
+                                      method="post">
+
+                                    <button type="submit"
+                                            class="btn-action btn-delete"
+                                            onclick="return confirm('¿Está seguro que desea eliminar este usuario?')">
+                                        🗑️
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                        <td class="text-id" th:text="${usuario.id_usuarios}"></td>
+                        <td><strong th:text="${usuario.nombre}"></strong></td>
+                        <td th:text="${usuario.tipo_documento}"></td>
+                        <td th:text="${usuario.documento}"></td>
+                        <td th:text="${usuario.telefono}"></td>
+                        <td class="text-email" th:text="${usuario.correo}"></td>
+                        <td th:text="${usuario.direccion}"></td>
+
+                        <td>
+                            <span class="badge-password">
+                                🔒 Protegida
+                            </span>
+                        </td>
+
+                        <td th:text="${usuario.fecha_nacimiento}"></td>
+                        <td th:text="${usuario.observaciones}"></td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

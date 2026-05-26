@@ -1,0 +1,182 @@
+<!-- fragments/layout.html -->
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- =========================
+     SIDEBAR FRAGMENT
+========================= -->
+<div th:fragment="sidebar(modulo)">
+
+    <aside id="sidebar"
+           class="w-72 min-h-screen bg-[#1b4332] text-white shadow-2xl flex flex-col transition-all duration-300">
+
+        <!-- LOGO -->
+        <div class="p-6 border-b border-white/10">
+
+            <div class="flex items-center gap-4">
+
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2d6a4f] to-[#40916c]
+                            flex items-center justify-center text-2xl shadow-lg">
+                    🌿
+                </div>
+
+                <div>
+                    <h1 class="text-2xl font-black tracking-wide">
+                        BOTANIX
+                    </h1>
+
+                    <p class="text-sm text-[#d8f3dc]">
+                        Gestión Botánica
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PERFIL -->
+        <div class="p-6 border-b border-white/10">
+
+            <div class="flex items-center gap-4">
+
+                <img src="https://i.pravatar.cc/100"
+                     class="w-14 h-14 rounded-full border-4 border-[#40916c] shadow-lg">
+
+                <div>
+                    <h2 class="font-bold text-lg">
+                        Administrador
+                    </h2>
+
+                    <p class="text-sm text-[#d8f3dc]">
+                        Panel principal
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MENU -->
+        <nav class="flex-1 p-5 overflow-y-auto">
+
+            <p class="text-xs uppercase tracking-widest text-[#d8f3dc] mb-4 px-3">
+                Navegación
+            </p>
+
+            <ul class="space-y-2">
+
+                <!-- DASHBOARD -->
+                <li>
+                    <a th:href="@{/dashboard}"
+                       th:classappend="${modulo == 'dashboard'} ? 'bg-[#2d6a4f] shadow-lg scale-[1.02]' : ''"
+                       class="flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300
+                              hover:bg-[#2d6a4f] hover:translate-x-1 group">
+
+                        <span class="text-2xl">📊</span>
+
+                        <div>
+                            <p class="font-semibold">
+                                Dashboard
+                            </p>
+
+                            <small class="text-[#d8f3dc]">
+                                Panel general
+                            </small>
+                        </div>
+
+                    </a>
+                </li>
+
+                <!-- PLANTAS -->
+                <li>
+                    <a th:href="@{/view/plantas}"
+                       th:classappend="${modulo == 'plantas'} ? 'bg-[#2d6a4f] shadow-lg scale-[1.02]' : ''"
+                       class="flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300
+                              hover:bg-[#2d6a4f] hover:translate-x-1 group">
+
+                        <span class="text-2xl">🌱</span>
+
+                        <div>
+                            <p class="font-semibold">
+                                Plantas
+                            </p>
+
+                            <small class="text-[#d8f3dc]">
+                                Catálogo botánico
+                            </small>
+                        </div>
+
+                    </a>
+                </li>
+
+                <!-- JARDINEROS -->
+                <li>
+                    <a th:href="@{/view/jardineros}"
+                       th:classappend="${modulo == 'jardineros'} ? 'bg-[#2d6a4f] shadow-lg scale-[1.02]' : ''"
+                       class="flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300
+                              hover:bg-[#2d6a4f] hover:translate-x-1 group">
+
+                        <span class="text-2xl">👷</span>
+
+                        <div>
+                            <p class="font-semibold">
+                                Jardineros
+                            </p>
+
+                            <small class="text-[#d8f3dc]">
+                                Personal de campo
+                            </small>
+                        </div>
+
+                    </a>
+                </li>
+
+                <!-- USUARIOS -->
+                <li>
+                    <a th:href="@{/view/usuarios}"
+                       th:classappend="${modulo == 'usuarios'} ? 'bg-[#2d6a4f] shadow-lg scale-[1.02]' : ''"
+                       class="flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300
+                              hover:bg-[#2d6a4f] hover:translate-x-1 group">
+
+                        <span class="text-2xl">👥</span>
+
+                        <div>
+                            <p class="font-semibold">
+                                Usuarios
+                            </p>
+
+                            <small class="text-[#d8f3dc]">
+                                Acceso al sistema
+                            </small>
+                        </div>
+
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- FOOTER -->
+        <div class="p-5 border-t border-white/10">
+
+            <div class="rounded-2xl bg-white/10 p-4 backdrop-blur">
+
+                <h3 class="font-bold text-lg mb-1">
+                    🌿 BOTANIX
+                </h3>
+
+                <p class="text-sm text-[#d8f3dc] leading-relaxed">
+                    Sistema de Gestión de Plantas y Jardineros.
+                </p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</div>
+
+</html>

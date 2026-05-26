@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Planta - BOTANIX</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#2d6a4f',
+                        naranja: '#e07b2e',
+                        azulClaro: '#d8f3dc',
+                        verde: '#40916c',
+                        oscuro: '#1b4332'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-[#d8f3dc] via-[#eef8f1] to-white min-h-screen">
+
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <div th:replace="fragments/layout :: sidebar('plantas')"></div>
+
+    <!-- CONTENIDO -->
+    <main class="flex-1 p-6 lg:p-10">
+
+        <!-- HEADER -->
+        <section class="page-header">
+
+            <div>
+                <small>🌿 Catálogo Botánico</small>
+
+                <h1 th:text="${plantas.id_planta == null} ? 'Registrar Planta' : 'Editar Planta'">
+                    Registrar Planta
+                </h1>
+
+                <p>
+                    Completa la información botánica de la planta para registrarla o actualizar sus datos.
+                </p>
+            </div>
+
+            <div class="buttons">
+                <a th:href="@{/view/plantas}" class="btn-custom btn-verde">
+                    ← Volver al Catálogo
+                </a>
+            </div>
+
+        </section>
+
+        <!-- FORMULARIO -->
+        <section class="bg-white rounded-[30px] shadow-xl overflow-hidden">
+
+            <div class="bg-[#1b4332] px-8 py-6">
+                <h2 class="text-2xl font-bold text-white">
+                    🌱 Datos de la Planta
+                </h2>
+                <p class="text-[#d8f3dc] mt-1">
+                    Todos los campos son necesarios para registrar la planta correctamente.
+                </p>
+            </div>
+
+            <form th:action="@{/view/plantas/save}"
+                  th:object="${plantas}"
+                  method="post"
+                  novalidate
+                  class="p-8">
+
+                <input type="hidden" th:field="*{id_planta}" />
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Código -->
+                    <div>
+                        <label class="block mb-2 font-bold text-[#1b4332]">
+                            Código
+                        </label>
+                        <input type="text"
+                               th:field="*{codigo}"
+                               required
+                               placeholder="Ej: PLT-001"
+                               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 outline-none transition focus:border-[#2d6a4f] focus:ring-4 focus:ring-[#2d6a4f]/20">
+                    </div>
+
+                    <!-- Nombre -->
+                    <div>
+                        <label class="block mb-2 font-bold text-[#1b4332]">
+                            Nombre Común
+                        </label>
+                        <input type="text"
+                               th:field="*{nombre}"
+                               required
+                               placeholder="Ej: Rosa, Girasol, Orquídea..."
+                               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 outline-none transition focus:border-[#2d6a4f] focus:ring-4 focus:ring-[#2d6a4f]/20">
+                    </div>
+
+                    <!-- Nombre Científico -->
+                    <div>
+                        <label class="block mb-2 font-bold text-[#1b4332]">
+                            Nombre Científico
+                        </label>
+                        <input type="text"
+                               th:field="*{nombre_cientifico}"
+                               required
+                               placeholder="Ej: Rosa canina"
+                               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 outline-none transition focus:border-[#2d6a4f] focus:ring-4 focus:ring-[#2d6a4f]/20 italic">
+                    </div>
+
+                    <!-- Especie -->
+                    <div>
+                        <label class="block mb-2 font-bold text-[#1b4332]">
+                            Especie / Familia
+                        </label>
+                        <input type="text"
+                               th:field="*{especie}"
+                               required
+                               placeholder="Ej: Rosaceae, Asteraceae..."
+                               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 outline-none transition focus:border-[#2d6a4f] focus:ring-4 focus:ring-[#2d6a4f]/20">
+                    </div>
+
+                    <!-- Cantidad -->
+                    <div>
+                        <label class="block mb-2 font-bold text-[#1b4332]">
+                            Cantidad en Stock
+                        </label>
+                        <input type="number"
+                               th:field="*{cantidad}"
+                               required
+                               min="0"
+                               placeholder="0"
+                               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 outline-none transition focus:border-[#2d6a4f] focus:ring-4 focus:ring-[#2d6a4f]/20">
+                    </div>
+
+                    <!-- Precio -->
+                    <div>
+                        <label class="block mb-2 font-bold text-[#1b4332]">
+                            Precio (COP)
+                        </label>
+                        <input type="number"
+                               th:field="*{precio}"
+                               required
+                               min="0"
+                               step="0.01"
+                               placeholder="0.00"
+                               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 outline-none transition focus:border-[#2d6a4f] focus:ring-4 focus:ring-[#2d6a4f]/20">
+                    </div>
+
+                </div>
+
+                <!-- BOTONES -->
+                <div class="flex flex-col sm:flex-row justify-end gap-4 mt-8 pt-6 border-t border-gray-100">
+
+                    <a th:href="@{/view/plantas}"
+                       class="btn-custom btn-verde justify-center">
+                        ← Volver
+                    </a>
+
+                    <button type="submit"
+                            class="btn-custom btn-principal justify-center">
+                        🌱 Guardar Planta
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
+
